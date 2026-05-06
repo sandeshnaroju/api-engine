@@ -118,37 +118,19 @@ socket.send({
 
 ------------------------------------------------------------------------
 
-## 4. RequestOptions Reference
+## 4. Options
 
-Use the `RequestOptions` object to override manifest defaults
-dynamically from your UI components.
+ `call` and `watch`  methods support below extra options.
 
-  ----------------------------------------------------------------------------
-  Property           Type                                 Description
-  ------------------ ------------------------------------ --------------------
-  params             Record\<string, string \| number\>   Replaces path
-                                                          variables (e.g.,
-                                                          `:id`)
-
-  query              Record\<string, any\>                Appends query
-                                                          strings (e.g.,
-                                                          `?limit=10`)
-
-  body               any                                  The request payload
-                                                          for
-                                                          POST/PUT/PATCH/SSE
-
-  headers            Record\<string, string\>             Custom headers
-                                                          (e.g., Auth tokens)
-
-  timeout            number                               Request timeout in
-                                                          milliseconds
-
-  signal             AbortSignal                          Cancel requests
-
-  fetchOptions       Record\<string, any\>                Pass-through for raw
-                                                          Axios/Fetch config
-  ----------------------------------------------------------------------------
+|        Property        |Type                          |Description                         |
+|----------------|-------------------------------|-----------------------------|
+|params|Replaces path variables (e.g., `:id` in `/users/:id`).            |`params: { id: 101 }`          |
+|query          |Appends key-value pairs as query strings (e.g., `?limit=10`).            |`query: { limit: 10, page: 1 }`            |
+|body          |The request payload (JSON) for POST, PUT, and SSE.|`body: { name: 'Sandesh' }`|
+|headers          |Custom HTTP headers (e.g., Auth tokens).|`headers: { 'Authorization': 'Bearer ...' }`|
+|timeout          |Maximum time (ms) to wait before the request fails.|`timeout: 5000`|
+|signal          |An `AbortSignal` used to manually cancel requests.|`signal: controller.signal`|
+|fetchOptions          |Pass-through for raw Axios or Fetch configurations.|`fetchOptions: { withCredentials: true }`|
 
 ------------------------------------------------------------------------
 

@@ -1,14 +1,14 @@
 version: "1.0"
-baseUrl: "http://localhost:3000"
+baseUrl: "https://jsonplaceholder.typicode.com"
 endpoints:
   get_post:
     protocol: "REST"
-    path: "https://jsonplaceholder.typicode.com/posts/:id"
+    path: "/posts/:id"
     method: "GET"
     timeout: 3000
   create_post:
     protocol: "REST"
-    path: "https://jsonplaceholder.typicode.com/posts"
+    path: "/posts"
     method: "POST"
     timeout: 5000
   ws_test:
