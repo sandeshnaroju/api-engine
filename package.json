@@ -1,0 +1,27 @@
+{
+  "name": "api-engine",
+  "version": "1.0.0",
+  "description": "A lightweight, protocol-agnostic API client designed to unify REST, Server-Sent Events (SSE), and WebSockets (WS)",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@microsoft/fetch-event-source": "^2.0.1",
+    "axios": "^1.16.0",
+    "eventsource": "^4.1.0",
+    "js-yaml": "^4.1.1",
+    "tsx": "^4.21.0",
+    "valibot": "^1.3.1",
+    "vite": "^8.0.10",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-yaml": "^4.1.2"
+  }
+}
