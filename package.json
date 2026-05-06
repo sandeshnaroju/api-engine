@@ -1,6 +1,9 @@
 {
   "name": "@sandeshnaroju/api-engine",
   "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A lightweight, protocol-agnostic API client designed to unify REST, Server-Sent Events (SSE), and WebSockets (WS)",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
