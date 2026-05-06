@@ -7,10 +7,14 @@ export default defineConfig({
     lib: {
       entry: './src/index.ts',
       name: 'APIEngine',
-      fileName: (format) => `apiengine.${format}.js`,
-      formats: ['es', 'iife']
+      formats: ['es', 'cjs', 'iife'], // ✅ remove iife
+      fileName: (format) => {
+        if (format === 'es') return 'index.js';
+        if (format === 'cjs') return 'index.cjs';
+        return `api-engine.${format}.js`;
+      }
     }
-  },
+  }  
   // server: {
   //   port: 3000,
   //   open: true,

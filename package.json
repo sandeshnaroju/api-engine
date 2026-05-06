@@ -2,26 +2,61 @@
   "name": "api-engine",
   "version": "1.0.0",
   "description": "A lightweight, protocol-agnostic API client designed to unify REST, Server-Sent Events (SSE), and WebSockets (WS)",
-  "main": "./src/index.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/sandeshnaroju/api-engine#readme",
+  "bugs": {
+    "url": "https://github.com/sandeshnaroju/api-engine/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build && tsc",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "api",
+    "client",
+    "typescript",
+    "sse",
+    "websocket",
+    "rest",
+    "fetch",
+    "eventsource",
+    "axios"
+  ],
+  "sideEffects": false,
+  "author": "Naroju Sandesh",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sandeshnaroju/api-engine.git"
+  },
   "dependencies": {
     "@microsoft/fetch-event-source": "^2.0.1",
     "axios": "^1.16.0",
-    "eventsource": "^4.1.0",
     "js-yaml": "^4.1.1",
-    "tsx": "^4.21.0",
-    "valibot": "^1.3.1",
-    "vite": "^8.0.10",
-    "ws": "^8.20.0"
+    "valibot": "^1.3.1"
   },
   "devDependencies": {
-    "@rollup/plugin-yaml": "^4.1.2"
-  }
+    "@rollup/plugin-yaml": "^4.1.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.10"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "engineStrict": false
 }
