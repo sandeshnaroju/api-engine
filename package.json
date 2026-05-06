@@ -1,5 +1,5 @@
 {
-  "name": "api-engine",
+  "name": "@sandeshnaroju/api-engine",
   "version": "1.0.0",
   "description": "A lightweight, protocol-agnostic API client designed to unify REST, Server-Sent Events (SSE), and WebSockets (WS)",
   "main": "dist/index.cjs",
