@@ -1,5 +1,5 @@
 {
-  "name": "@sandeshnaroj/api-engine",
+  "name": "api-engine-client",
   "version": "1.0.1",
   "publishConfig": {
     "access": "public"
