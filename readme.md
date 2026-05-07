@@ -50,6 +50,55 @@ endpoints:
 
 ## 4. Usage
 
+#### Initializing 
+
+If you place your api.yml file in your project's public folder, the engine can find it automatically without you needing to import or pass anything. This is ideal if you want to update the API configuration without rebuilding your entire React/Vue app.
+
+```javascript
+// Looks for /api.yml in your web server's root automatically
+const api = await APIEngine.init();
+```
+
+This is the most common method in modern development. You keep the api.yml in your src folder or project root and import it. Because bundlers convert these imports into URL strings, init() handles the background fetching for you.
+
+```javascript
+import manifestUrl from './api.yml';
+// init() detects the URL string and fetches the content
+const api = await APIEngine.init(manifestUrl);
+```
+
+If you are fetching your configuration from a custom database, a CMS, or even a text-area in your UI, you can pass the raw YAML text directly. The engine will parse it on the fly.
+
+```javascript
+const rawYaml = `
+baseUrl: https://api.production.com
+endpoints:
+  get_users:
+    protocol: REST
+    path: /users
+`;
+
+// Works with the static initializer...
+const api = await APIEngine.init(rawYaml);
+
+// ...or directly with the constructor
+const api = new APIEngine(rawYaml);
+```
+
+If you prefer to work with JSON or hardcoded configuration objects, you can skip the YAML parsing entirely. This is the fastest method as it involves no network requests or string parsing.
+
+```javascript
+const config = {
+  baseUrl: "https://api.production.com",
+  endpoints: {
+    ping: { protocol: "REST", path: "/health" }
+  }
+};
+
+// Pass the object directly
+const api = new APIEngine(config);
+```
+
 You can use the api-engine like below:
 
 #### REST:
@@ -57,7 +106,7 @@ You can use the api-engine like below:
 ```javascript
 import manifest from './api.yml';
 
-const api = new APIEngine(manifest);
+const api = await APIEngine.init(manifest);
 
 // GET
 const todo = await api.call('get_post', { 
@@ -78,7 +127,7 @@ const res = await api.call('create_post', {
 ```javascript
 import manifest from './api.yml';
 
-const api = new APIEngine(manifest);
+const api = await APIEngine.init(manifest);
 
 // Normal Usage: Listening to a live log stream
 const stream = api.watch('sse_test');
@@ -96,7 +145,7 @@ const unsubscribe = stream.subscribe((log) => {
 ```javascript
 import manifest from './api.yml';
 
-const api = new APIEngine(manifest);
+const api = await APIEngine.init(manifest);
 
 // Normal Usage: A real-time chat or command console
 const socket = api.watch('ws_test');
@@ -144,7 +193,7 @@ socket.send({
   import { APIEngine } from './dist/index.js';
   import manifest from './api.yml';
 
-  const api = new APIEngine(manifest);
+  const api = await APIEngine.init(manifest);
 
   const todo = await api.call('get_todo', { params: { id: 1 } });
 
@@ -166,6 +215,9 @@ socket.send({
 
 import { useEffect, useState } from 'react';
 import { api } from './api-client';
+import manifest from './api.yml';
+
+const api = await APIEngine.init(manifest);
 
 export const Dashboard = ({ sensorId }) => {
   const [data, setData] = useState(null);
@@ -197,6 +249,9 @@ export const Dashboard = ({ sensorId }) => {
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import { api } from '@/services/api';
+import manifest from './api.yml';
+
+const api = await APIEngine.init(manifest);
 
 const messages = ref([]);
 let sseUnsub = null;
